@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special for Fanny</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Pacifico&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #fff0f3;
+            font-family: 'Quicksand', sans-serif;
+            /* Sekarang bisa scroll jika konten kepanjangan */
+            overflow-x: hidden;
+            transition: background 1.5s ease;
+        }
+
+        /* --- TAMPILAN AWAL --- */
+        #welcome-screen {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .intro-text {
+            font-size: clamp(1.1rem, 5vw, 1.4rem); /* Ukuran teks dinamis */
+            color: #555;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .btn-surprise {
+            background: linear-gradient(45deg, #ff4d6d, #ff758f);
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.4);
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        /* --- TAMPILAN SURPRISE --- */
+        #content-screen {
+            display: none;
+            text-align: center;
+            width: 90%;
+            max-width: 450px;
+            margin: 40px auto; /* Jarak atas bawah supaya tidak mepet layar */
+            animation: zoomIn 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .card {
+            background: white;
+            padding: clamp(20px, 5vw, 35px);
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 8px solid #ffe3e9;
+        }
+
+        .bear-container {
+            width: clamp(150px, 50vw, 220px); /* Beruang mengecil di HP */
+            margin: 0 auto 15px;
+            animation: float 3s infinite ease-in-out;
+        }
+
+        .bear-img {
+            width: 100%;
+            height: auto;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            color: #ff4d6d;
+            font-size: clamp(1.4rem, 6vw, 1.8rem);
+            margin: 0 0 15px 0;
+        }
+
+        .speech-bubble {
+            background: #fff9fa;
+            padding: 15px 20px;
+            border-radius: 20px;
+            color: #444;
+            font-size: clamp(0.95rem, 4vw, 1.05rem);
+            line-height: 1.6;
+            border: 2px solid #ffccd5;
+            word-wrap: break-word; /* Mencegah teks keluar kotak */
+        }
+
+        .highlight {
+            color: #ff4d6d;
+            font-weight: bold;
+        }
+
+        .late-note {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #ff85a1;
+            font-weight: bold;
+        }
+
+        /* Animasi */
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+        }
+
+        .heart {
+            position: fixed; /* Fixed supaya tetap di background saat scroll */
+            color: #ff758f;
+            font-size: 20px;
+            animation: fall 4s linear infinite;
+            top: -10%;
+            z-index: -1;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="welcome-screen">
+        <div class="intro-text">
+            Hallo kamu <b>Fanny</b> ya? <br>
+            Anak Supranto? ahhahaha <br>
+            Engga bercanda...
+        </div>
+        <button class="btn-surprise" onclick="showSurprise()">Coba klik ini deh! 🎀</button>
+    </div>
+
+    <div id="content-screen">
+        <div class="card">
+            <h1>From Pudan For Fanny</h1>
+            
+            <div class="bear-container">
+                <img src="https://img.freepik.com/free-vector/cute-pink-bear-holding-flower-bouquet-cartoon-vector-icon-illustration-animal-nature-icon-concept_138676-4444.jpg" alt="Bear Flowers" class="bear-img">
+            </div>
+
+            <div class="speech-bubble">
+                "Hallo <span class="highlight">Fanny</span>, selamat Valentine yaa! <br><br>
+                Jadi aku <b>boneka beruang</b> yang dikasi oleh <span class="highlight">Pudan</span> samamu.. iya emang boneka nya gabisa dipeluk sii ahahhahah..<br><br>
+                Semoga harimu menyenangkan ya setiap detik, menit, dan jam!"
+                <span class="late-note">Maaf ya agak telat dikit hehe.. ✌️</span>
+            </div>
+        </div>
+        <div style="height: 20px;"></div>
+    </div>
+
+    <script>
+        function showSurprise() {
+            document.getElementById('welcome-screen').style.display = 'none';
+            document.getElementById('content-screen').style.display = 'block';
+            document.body.style.background = 'radial-gradient(circle, #fff0f3 0%, #ffc2d1 100%)';
+            // Izinkan scroll di body setelah kejutan muncul
+            document.body.style.overflowY = 'auto'; 
+            setInterval(createHeart, 300);
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '💗';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 4000);
+        }
+    </script>
+
+</body>
+</html>
